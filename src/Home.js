@@ -23,10 +23,18 @@ const Home = () => {
     },
   ]);
   
-  const newTicker = (prev, value) => {
+  const newTicker = (value) => {
     console.log(defaultTikers);
-    setDefaultTickers([...prev, { name: value, price: 123}]);
+    setDefaultTickers(prevTickers => {
+    return [...prevTickers, { name: value, price: 123}];
+    });
     console.log(defaultTikers);
+  };
+
+  const deleteHandler = (idx) => {
+    const delTicker = defaultTikers;
+    delTicker.splice(idx, 1);
+    setDefaultTickers([...delTicker]); 
   }
 
   return (
@@ -50,7 +58,9 @@ const Home = () => {
                 </dd>
               </div>
               <div className="w-full border-t border-gray-200"></div>
-              <button className="flex items-center justify-center font-medium w-full bg-gray-100 px-4 py-4 sm:px-6 text-md text-gray-500 hover:text-gray-600 hover:bg-gray-200 hover:opacity-20 transition-all focus:outline-none">
+              <button className="flex items-center justify-center font-medium w-full bg-gray-100 px-4 py-4 sm:px-6 text-md text-gray-500 hover:text-gray-600 hover:bg-gray-200 hover:opacity-20 transition-all focus:outline-none"
+              onClick={()=>deleteHandler(idx)}>
+                
                 <svg
                   className="h-5 w-5"
                   xmlns="http://www.w3.org/2000/svg"
