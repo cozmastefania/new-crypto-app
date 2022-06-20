@@ -1,22 +1,17 @@
 import React, { useState } from "react";
 
-function Ticker() {
-  const [enteredTicker, setEnteredTicker] = useState([
-    "BTC",
-    "USD",
-    "DOGE",
-    "VUE",
-  ]);
+function Ticker(props) {
+  const [enteredTicker, setEnteredTicker] = useState('');
 
   const submitHandler = (event) => {
     event.preventDefault();
-    setEnteredTicker([...enteredTicker, event.target.value]);
-
+    props.newTicker(enteredTicker);
+    
     setEnteredTicker("");
   };
 
-  const changeHandler = (value) => {
-    setEnteredTicker(value);
+  const changeHandler = (event) => {
+    setEnteredTicker(event.target.value);
   };
 
   return (
@@ -43,7 +38,7 @@ function Ticker() {
             </div>
             <div className="flex bg-white shadow-md p-1 rounded-md flex-wrap">
               <span className="inline-flex items-center px-2 m-1 rounded-md text-xs font-medium bg-gray-300 text-gray-800 cursor-pointer">
-                {enteredTicker}
+                
               </span>
             </div>
           </div>
