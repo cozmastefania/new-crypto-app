@@ -2,8 +2,11 @@ import React from "react";
 import Loading from "./components/Loading";
 import Ticker from "./components/Ticker";
 import {useState} from 'react';
+import useFetch from "./useFetch";
 
 const Home = () => {
+
+  const {data, error} = useFetch();
   const [defaultTikers, setDefaultTickers] = useState([
     {
       name: "BTC",
@@ -24,18 +27,21 @@ const Home = () => {
   ]);
   
   const newTicker = (value) => {
-    console.log(defaultTikers);
+    const a = data.Data[value]['Id'];
+    console.log(a);
     setDefaultTickers(prevTickers => {
-    return [...prevTickers, { name: value, price: 123}];
-    });
-    console.log(defaultTikers);
+      return [...prevTickers, { name: value, price: a}];
+      });
   };
 
   const deleteHandler = (idx) => {
     const delTicker = defaultTikers;
     delTicker.splice(idx, 1);
     setDefaultTickers([...delTicker]); 
+  
   }
+
+ 
 
   return (
     <div className="container mx-auto flex flex-col items-center bg-gray-100 p-4">
@@ -54,7 +60,7 @@ const Home = () => {
                   {item.name} - USD
                 </dt>
                 <dd className="mt-1 text-3xl font-semibold text-gray-900">
-                  {item.price}
+                {item.price}
                 </dd>
               </div>
               <div className="w-full border-t border-gray-200"></div>

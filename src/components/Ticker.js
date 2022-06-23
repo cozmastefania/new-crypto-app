@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 function Ticker(props) {
   const [enteredTicker, setEnteredTicker] = useState('');
@@ -13,6 +14,10 @@ function Ticker(props) {
   const changeHandler = (event) => {
     setEnteredTicker(event.target.value);
   };
+
+  Ticker.propTypes = {
+    newTicker: PropTypes.func,
+  }
 
   return (
     <section>
