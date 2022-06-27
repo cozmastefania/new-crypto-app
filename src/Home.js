@@ -1,38 +1,42 @@
-import React from "react";
+//import React, { useEffect } from "react";
 import Loading from "./components/Loading";
 import Ticker from "./components/Ticker";
 import {useState} from 'react';
 import useFetch from "./useFetch";
 
 const Home = () => {
-
-  const {data, error} = useFetch();
+  
   const [defaultTikers, setDefaultTickers] = useState([
     {
       name: "BTC",
-      price: 100,
+      price: 21242.98,
     },
     {
       name: "USD",
-      price: 200,
+      price: 1,
     },
     {
-      name: "VUE",
-      price: 120,
+      name: "EUR",
+      price: 1.057,
     },
     {
       name: "WTF",
-      price: 20,
+      price: 0.002242,
     },
   ]);
-  
+
+  let val = defaultTikers[defaultTikers.length-1].name;
+
   const newTicker = (value) => {
-    const a = data.Data[value]['Id'];
-    console.log(a);
+    val = value;
+    const a = data.USD;
     setDefaultTickers(prevTickers => {
       return [...prevTickers, { name: value, price: a}];
       });
   };
+
+  const {data} = useFetch(val);
+  console.log(defaultTikers[defaultTikers.length-1].name)
 
   const deleteHandler = (idx) => {
     const delTicker = defaultTikers;
@@ -41,14 +45,12 @@ const Home = () => {
   
   }
 
- 
-
   return (
     <div className="container mx-auto flex flex-col items-center bg-gray-100 p-4">
       <Loading />
       <div className="container">
         <hr className="w-full border-t border-gray-600 my-4" />
-
+        <Ticker newTicker = {newTicker}/>
         <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
           {defaultTikers.map((item, idx) => (
             <div
@@ -85,7 +87,7 @@ const Home = () => {
             </div>
           ))}
         </dl>
-        <Ticker newTicker = {newTicker}/>
+        
       </div>
     </div>
   );
