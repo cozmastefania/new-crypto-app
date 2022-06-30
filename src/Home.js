@@ -28,7 +28,6 @@ const Home = () => {
   let val = defaultTikers[defaultTikers.length-1].name;
 
   const newTicker = (value) => {
-    val = value;
     const a = data.USD;
     setDefaultTickers(prevTickers => {
       return [...prevTickers, { name: value, price: a}];
