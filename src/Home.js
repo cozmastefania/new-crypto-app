@@ -3,49 +3,51 @@ import Loading from "./components/Loading";
 import Ticker from "./components/Ticker";
 import {useState} from 'react';
 import useFetch from "./useFetch";
+import AuthPage from "./AuthPage";
+
+const defaultTikers = [
+  {
+    name: "BTC",
+    price: 21242.98,
+  },
+  {
+    name: "USD",
+    price: 1,
+  },
+  {
+    name: "EUR",
+    price: 1.057,
+  },
+  {
+    name: "WTF",
+    price: 0.002242,
+  },
+];
+
 
 const Home = () => {
-  
-  const [defaultTikers, setDefaultTickers] = useState([
-    {
-      name: "BTC",
-      price: 21242.98,
-    },
-    {
-      name: "USD",
-      price: 1,
-    },
-    {
-      name: "EUR",
-      price: 1.057,
-    },
-    {
-      name: "WTF",
-      price: 0.002242,
-    },
-  ]);
 
-  let val = defaultTikers[defaultTikers.length-1].name;
+  const [addedTickers, setAddedTickers] = useState(defaultTikers);
 
   const newTicker = (value) => {
     const a = data.USD;
-    setDefaultTickers(prevTickers => {
+    setAddedTickers(prevTickers => {
       return [...prevTickers, { name: value, price: a}];
       });
   };
 
-  const {data} = useFetch(val);
-  console.log(defaultTikers[defaultTikers.length-1].name)
+  const {data} = useFetch(addedTickers[addedTickers.length - 1]);
 
   const deleteHandler = (idx) => {
-    const delTicker = defaultTikers;
+    const delTicker = addedTickers;
     delTicker.splice(idx, 1);
-    setDefaultTickers([...delTicker]); 
+    setAddedTickers([...delTicker]); 
   
   }
 
   return (
     <div className="container mx-auto flex flex-col items-center bg-gray-100 p-4">
+      <AuthPage/>
       <Loading />
       <div className="container">
         <hr className="w-full border-t border-gray-600 my-4" />

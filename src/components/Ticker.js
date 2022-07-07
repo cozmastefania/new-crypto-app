@@ -75,7 +75,7 @@ function Ticker(props) {
                 onChange={(e) => onChangeHandler(e.target.value)}
               />
               {suggestions &&
-                suggestions.map((suggestion, idx) => (
+                suggestions?.map((suggestion, idx) => (
                   <div
                     key={idx}
                     className="inline-flex items-center px-2 m-1 rounded-md text-xs font-medium bg-gray-300 text-gray-800 cursor-pointer"
